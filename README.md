@@ -4,7 +4,7 @@ Aplikasi sederhana URL shortener — memendekkan URL panjang menjadi tautan sing
 
 ## Status
 
-🚧 Dalam pengembangan. Backend masih berupa skeleton FastAPI, frontend belum di-scaffold.
+🚧 Dalam pengembangan.
 
 ## Fitur (rencana)
 
@@ -15,8 +15,10 @@ Aplikasi sederhana URL shortener — memendekkan URL panjang menjadi tautan sing
 
 ## Tech Stack
 
-- **Backend**: Python, FastAPI, Uvicorn
-- **Frontend**: Next.js
+- **Backend**: Python, FastAPI, Uvicorn, SQLAlchemy, Alembic, psycopg
+- **Frontend**: Next.js (App Router), TypeScript, Tailwind CSS, pnpm
+- **Database**: PostgreSQL
+- **Infra**: Docker, Docker Compose
 
 ## Struktur Proyek
 
@@ -25,7 +27,7 @@ linky/
 ├── backend/
 │   ├── app/
 │   │   ├── api/            # route/endpoint
-│   │   ├── core/           # konfigurasi inti
+│   │   ├── core/           # konfigurasi inti (config.py)
 │   │   ├── db/             # koneksi & setup database
 │   │   ├── dependencies/   # dependency injection FastAPI
 │   │   ├── models/         # model database
@@ -34,30 +36,47 @@ linky/
 │   │   ├── services/       # logika bisnis
 │   │   ├── utils/          # helper/utility
 │   │   └── main.py         # entry point FastAPI
+│   ├── Dockerfile
 │   └── requirements.txt
-└── frontend/                # Next.js (belum di-scaffold)
+├── frontend/
+│   ├── app/                # halaman & layout (App Router)
+│   ├── hooks/               # custom React hooks (mis. use-cookie.ts)
+│   ├── lib/                 # fetch wrapper, helper client (mis. api.ts)
+│   └── Dockerfile
+└── docker-compose.yml       # service: postgres, backend, frontend
 ```
 
-## Menjalankan Backend
+## Menjalankan dengan Docker
+
+```bash
+docker compose up --build
+```
+
+- Backend: `http://localhost:8000`
+- Frontend: `http://localhost:3000`
+- PostgreSQL: `localhost:5432` (user/pass/db default: `linky`/`linky`/`linky`)
+
+## Menjalankan Manual (tanpa Docker)
+
+### Backend
 
 ```bash
 cd backend
 python -m venv .venv
 source .venv/bin/activate
 pip install -r requirements.txt
-uvicorn app.main:app --reload
+cp .env.example .env   # sesuaikan DATABASE_URL
+fastapi dev
 ```
 
 Backend akan berjalan di `http://localhost:8000`.
 
-## Menjalankan Frontend
-
-Frontend belum di-scaffold. Untuk memulai:
+### Frontend
 
 ```bash
 cd frontend
-npx create-next-app@latest .
-npm run dev
+pnpm install
+pnpm dev
 ```
 
 Frontend akan berjalan di `http://localhost:3000`.
