@@ -1,17 +1,17 @@
 # Linky
 
-Aplikasi sederhana URL shortener — memendekkan URL panjang menjadi tautan singkat yang mudah dibagikan. Dibangun dengan **FastAPI** (backend) dan **Next.js** (frontend).
+A simple URL shortener — turns long URLs into short, easy-to-share links. Built with **FastAPI** (backend) and **Next.js** (frontend).
 
 ## Status
 
-🚧 Dalam pengembangan.
+🚧 Work in progress.
 
-## Fitur (rencana)
+## Features (planned)
 
-- Membuat short link dari URL panjang
-- Redirect dari short link ke URL asli
-- Autentikasi pengguna
-- Statistik klik per link
+- Create a short link from a long URL
+- Redirect from a short link to the original URL
+- User authentication
+- Click statistics per link
 
 ## Tech Stack
 
@@ -20,33 +20,33 @@ Aplikasi sederhana URL shortener — memendekkan URL panjang menjadi tautan sing
 - **Database**: PostgreSQL
 - **Infra**: Docker, Docker Compose
 
-## Struktur Proyek
+## Project Structure
 
 ```
 linky/
 ├── backend/
 │   ├── app/
-│   │   ├── api/            # route/endpoint
-│   │   ├── core/           # konfigurasi inti (config.py)
-│   │   ├── db/             # koneksi & setup database
-│   │   ├── dependencies/   # dependency injection FastAPI
-│   │   ├── models/         # model database
-│   │   ├── repositories/   # akses data
-│   │   ├── schemas/        # schema request/response (Pydantic)
-│   │   ├── services/       # logika bisnis
-│   │   ├── utils/          # helper/utility
-│   │   └── main.py         # entry point FastAPI
+│   │   ├── api/            # routes/endpoints
+│   │   ├── core/           # core configuration (config.py)
+│   │   ├── db/              # database connection & setup
+│   │   ├── dependencies/   # FastAPI dependency injection
+│   │   ├── models/         # database models
+│   │   ├── repositories/   # data access
+│   │   ├── schemas/        # request/response schemas (Pydantic)
+│   │   ├── services/       # business logic
+│   │   ├── utils/          # helpers/utilities
+│   │   └── main.py         # FastAPI entry point
 │   ├── Dockerfile
 │   └── requirements.txt
 ├── frontend/
-│   ├── app/                # halaman & layout (App Router)
-│   ├── hooks/               # custom React hooks (mis. use-cookie.ts)
-│   ├── lib/                 # fetch wrapper, helper client (mis. api.ts)
+│   ├── app/                # pages & layout (App Router)
+│   ├── hooks/               # custom React hooks (e.g. use-cookie.ts)
+│   ├── lib/                 # fetch wrapper, client helpers (e.g. api.ts)
 │   └── Dockerfile
-└── docker-compose.yml       # service: postgres, backend, frontend
+└── docker-compose.yml       # services: postgres, backend, frontend
 ```
 
-## Menjalankan dengan Docker
+## Running with Docker
 
 ```bash
 docker compose up --build
@@ -54,9 +54,9 @@ docker compose up --build
 
 - Backend: `http://localhost:8000`
 - Frontend: `http://localhost:3000`
-- PostgreSQL: `localhost:5432` (user/pass/db default: `linky`/`linky`/`linky`)
+- PostgreSQL: `localhost:5432` (default user/pass/db: `linky`/`linky`/`linky`)
 
-## Menjalankan Manual (tanpa Docker)
+## Running Manually (without Docker)
 
 ### Backend
 
@@ -65,11 +65,11 @@ cd backend
 python -m venv .venv
 source .venv/bin/activate
 pip install -r requirements.txt
-cp .env.example .env   # sesuaikan DATABASE_URL
+cp .env.example .env   # adjust DATABASE_URL
 fastapi dev
 ```
 
-Backend akan berjalan di `http://localhost:8000`.
+The backend will run at `http://localhost:8000`.
 
 ### Frontend
 
@@ -79,4 +79,4 @@ pnpm install
 pnpm dev
 ```
 
-Frontend akan berjalan di `http://localhost:3000`.
+The frontend will run at `http://localhost:3000`.
