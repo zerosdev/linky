@@ -7,6 +7,8 @@ class Settings(BaseSettings):
     model_config = SettingsConfigDict(env_file=".env", env_file_encoding="utf-8")
 
     database_url: str
+    hashids_salt: str = "change-me-in-prod"
+    hashids_min_length: int = 6
 
 
 @lru_cache

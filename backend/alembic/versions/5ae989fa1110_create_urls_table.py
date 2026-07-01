@@ -26,6 +26,8 @@ def upgrade() -> None:
     sa.Column('original_url', sa.String(), nullable=True),
     sa.Column('slug', sa.String(), nullable=True),
     sa.Column('created_at', sa.String(), nullable=True),
+    sa.Column('expires_at', sa.String(), nullable=True),
+    sa.Column('click_count', sa.Integer(), nullable=True),
     sa.PrimaryKeyConstraint('id')
     )
     op.create_index(op.f('ix_urls_id'), 'urls', ['id'], unique=False)
