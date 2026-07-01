@@ -17,3 +17,6 @@ def set_slug(db: Session, url: Url, slug: str) -> Url:
     db.commit()
     db.refresh(url)
     return url
+
+def get_by_slug(db: Session, slug: str) -> Url | None:
+    return db.query(Url).filter(Url.slug == slug).first()

@@ -16,3 +16,9 @@ def create_short_url(db: Session, original_url: str) -> Url:
     )
     slug = hashids.encode(url.id)
     return url_repository.set_slug(db, url, slug)
+
+def get_short_url(db: Session, slug: str) -> Url:
+    url = url_repository.get_by_slug(db, slug)
+    if not url:
+        raise ValueError("URL not found")
+    return url
